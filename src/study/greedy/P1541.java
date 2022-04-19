@@ -15,43 +15,28 @@ public class P1541 {
 		}
 		result += Integer.parseInt(fristNum);
 		for (int i = flag; i < str.length(); i++){
-			if (!(str.charAt(i) == '+' || str.charAt(i) == '-')){
-				num += str.charAt(i);
-			}
+			if (!(str.charAt(i) == '+' || str.charAt(i) == '-')) num += str.charAt(i);
 			if (str.charAt(i) == '+' || str.charAt(i) == '-'){
 				intNum = Integer.parseInt(num);
 				num = "";
-
-				if (ch == 1){
-					temp += intNum;
-				} else {
-					result += intNum;
-				}
-				if (str.charAt(i) == '-'){
-					ch = 1;
-				}
+				if (ch == 1)temp += intNum;
+				else result += intNum;
+				if (str.charAt(i) == '-') ch = 1;
 			}
 		}
 		intNum = Integer.parseInt(num);
-		if (ch == 1){
-			temp += intNum;
-		} else {
-			result += intNum;
-		}
+		if (ch == 1) temp += intNum;
+		else result += intNum;
 
-
-		result = result - temp;
-
-		return result;
+		return result = result - temp;
 	}
 	
 	public static void main(String []args) {
 		Scanner sc = new Scanner(System.in);
 		String str = sc.next();
 		char []str2 = new char[str.length() + 1];
-		for (int i = 0; i < str.length(); i++){
+		for (int i = 0; i < str.length(); i++)
 			str2[i] = str.charAt(i);
-		}
 		System.out.println(solution(str));
 	}
 }
