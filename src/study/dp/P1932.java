@@ -23,9 +23,7 @@ public class P1932 {
 		for (int i = 0; i <= n; i++) {
 			if (max < result[n][i]) max = result[n][i];
 		}
-//		if (n == 1) {
-//			System.out.println(1);
-//		}
-System.out.println(max);
+
+		System.out.println(max);
 	}
 }
