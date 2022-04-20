@@ -16,7 +16,6 @@ public class P1149 {
 			rgb[i][1] = Math.min(rgb[i - 1][0], rgb[i - 1][2]) + g;
 			rgb[i][2] = Math.min(rgb[i - 1][0], rgb[i - 1][1]) + b;
 		}
-
 		System.out.println(Math.min(rgb[n][2], Math.min(rgb[n][0], rgb[n][1])));		
 	}
 }
