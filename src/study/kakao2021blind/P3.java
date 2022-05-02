@@ -20,7 +20,7 @@ class Solution3 {
             if(str.charAt(i) == '(') open++;
             else {
                 open--;
-                if(open<0) return false;
+                if(open < 0) return false;
             }
         }
         return true;

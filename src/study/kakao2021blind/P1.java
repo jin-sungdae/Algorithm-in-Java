@@ -18,7 +18,7 @@ class Solution {
             List<Integer> scoreList = allInfo.get(list.get(i));
             Collections.sort(scoreList);
         }
-
+        
         for (int i = 0; i < query.length; i++){
             query[i] = query[i].replaceAll(" and " , "");
             String[] str = query[i].split(" ");
@@ -42,7 +42,6 @@ class Solution {
 
         dfs (str + "-", depth + 1, info);
         dfs (str + info[depth], depth + 1, info);
-
     }
 
     static int search(String str, int score){
