@@ -1,61 +1,65 @@
 package programmers1L;
 
+import java.util.*;
+
+class Point{
+	public int x, y;
+	Point(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+}
+
 class Solution {
-	static int []dx = {-1, 0, 1, 0};
-	static int []dy = {0, -1, 0, 1};
+
+	static int [][] phone = {{1,2,3},{4,5,6},{7,8,9},{99,0,100}};
+	static Queue<Point> p;
+	
     public static String solution(int[] numbers, String hand) {
-    	int [][] phone = {{1,2,3},{4,5,6},{7,8,9},{99,0,100}};
         String answer = "";
-        int num = 99;
-        int lNum = 0;
-        int rNum = 0;
-        int iLC = 0;
-        int jLC = 0;
-        int iRC = 0;
-        int jRC = 0;
-        int cnt = Integer.MIN_VALUE;
-        int t, y = 0;
+        Point left = new Point(3, 0);
+        Point right = new Point(3, 2);
+
+        p = new LinkedList<>();
         for (int x : numbers) {
-        	t= 0; y = 0;
-        	if (x == 1 || x == 4 || x == 7) {
-        		answer += "L";
-        		lNum = x;
-        	}
-        	else if (x == 3 || x == 6 || x == 9) {
-        		answer += "R";
-        		rNum = x;
-        	}
-        	else if (x == 2 || x == 5 || x == 8 || x == 0) {
-        		for (int i = 0; i < 4; i++) {
-        			for (int j = 0; j < 3; j++) {
-        				if (phone[i][j] == lNum) {
-        					iLC = i;
-        					jLC	= j;
-        				}
-        				if (phone[i][j] == rNum) {
-        					iRC = i;
-        					jRC = j;
-        				}
-        			}
-        		}
-        		jLC +=1;
-        		int LeftNum = phone[iLC][jLC];
-        		//System.out.println(LeftNum);
-        		while (LeftNum != x) {
-        			if (phone[++iLC][jLC] > x) {
-        				LeftNum = phone[iLC][jLC];
-        				t++;
-        			} else if (phone[--iLC][jLC] < x){
-        				LeftNum = phone[iLC][jLC];
-        				t++;
-        			}
-        		}
-        		System.out.println(t);
-        	}
-        	num = x;
+        	if (x == 0) x = 11;
+        	p.add(new Point((x - 1) / 3, (x - 1) % 3));
         }
+        
+        
+        while (!p.isEmpty()) {
+        	Point tmp = p.poll();
+        	if (tmp.y == 0) {
+        		left = tmp;
+        		answer += "L";
+        	} else if (tmp.y == 2) {
+        		right = tmp;
+        		answer += "R";
+        	} else {
+        		int diff = (Math.abs(tmp.x - left.x) + Math.abs(tmp.y - left.y)) - (Math.abs(tmp.x - right.x) + Math.abs(tmp.y - right.y));
+        		if (diff > 0) {
+        			right = tmp;
+        			answer += "R";
+        		} else if (diff == 0) {
+        			if (hand.equals("right")) {
+        				right = tmp;
+            			answer += "R";
+        			} else {
+        				left = tmp;
+            			answer += "L";
+        			}
+        		
+        		}else {
+        			left = tmp;
+        			answer += "L";
+        		}
+
+        	}
+        }
+       
         return answer;
     }
+
 }
 
 public class P1 {
