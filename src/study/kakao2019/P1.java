@@ -4,43 +4,42 @@ import java.util.*;
 
 class Solution {
     public static String[] solution(String[] record) {
-        String[] answer = new String[record.length];
+
         HashMap<String, String> map = new HashMap<>();
-        
-        int findChangeCnt = 0;
-        
-        for (String x : record) {
-        	if (x.contains("Change")) {
-        		String [] splitRecord = x.split(" ");
-        		map.put(splitRecord[1], splitRecord[2]);
-        	} else findChangeCnt++;
-        	if (x.contains("Enter")) {
-        		String [] splitRecord = x.split(" ");
-        		map.put(splitRecord[1], splitRecord[2]);
-        	}
-        }
-        
-        int i = 0;
+        ArrayList<String> arr = new ArrayList();
+
+        int findChangeCnt = 0;  
         for (String x : record) {
         	String [] splitRecord = x.split(" ");
-        	if (map.containsKey(splitRecord[1]) && !splitRecord[0].equals("Leave")) {	
-        			x = x.replace(splitRecord[2], map.get(splitRecord[1]));
+        	if (x.contains("Change")) {
+
+        		map.put(splitRecord[1], splitRecord[2]);
+
         	}
-        	answer[i++] = x;
+        	else if (x.contains("Enter")) {
+   
+        		map.put(splitRecord[1], splitRecord[2]);
+        		arr.add(splitRecord[1] + "님이 들어왔습니다.");
+  
+        	} else if (x.contains("Leave")) {
+   
+        		arr.add(splitRecord[1] + "님이 나갔습니다.");
+
+        	}
+
         }
         
-        String [] result = new String[findChangeCnt];
-        for (int t = 0; t < findChangeCnt; t++) {
+        String [] result = new String[arr.size()];
+        for (int t = 0; t < arr.size(); t++) {
         	String temp = "";
-        	String [] splitRecord = answer[t].split(" ");
-        	if (answer[t].contains("Enter")) {
-        		temp += map.get(splitRecord[1]);
-        		temp += "님이 들어왔습니다.";
-        	} else if (answer[t].contains("Leave")) {
-        		temp += map.get(splitRecord[1]);
-        		temp += "님이 나갔습니다.";
-        	}
+        	String [] splitRecord = arr.get(t).split(" ");
+        	splitRecord[0]= splitRecord[0].replace("님이", "");
+
+        	temp += map.get(splitRecord[0]);
+        	temp += "님이 ";
+        	temp += splitRecord[1];
         	result[t] = temp;
+        	
         }
         
         return result;
