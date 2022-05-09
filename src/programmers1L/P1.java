@@ -11,8 +11,6 @@ class Point{
 }
 
 class Solution {
-
-	static int [][] phone = {{1,2,3},{4,5,6},{7,8,9},{99,0,100}};
 	static Queue<Point> p;
 	
     public static String solution(int[] numbers, String hand) {
@@ -25,7 +23,6 @@ class Solution {
         	if (x == 0) x = 11;
         	p.add(new Point((x - 1) / 3, (x - 1) % 3));
         }
-        
         
         while (!p.isEmpty()) {
         	Point tmp = p.poll();
