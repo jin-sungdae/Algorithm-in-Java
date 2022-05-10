@@ -3,20 +3,61 @@ package study.kakao2019;
 import java.util.*;
 
 class Solution2 {
+	static List<String> list = new ArrayList<>();
+	
+	public static void dfs(boolean[] visited, int start, int depth, int end, String[][] relation) {
+		if (depth == end) {
+			List<Integer> list2 = new ArrayList<>();
+			String key = "";
+			for (int i = 0; i < visited.length; i++) {
+				if (visited[i]) {
+					key += String.valueOf(i);
+					list2.add(i);
+				}
+			}
+			
+			Map<String, Integer> map = new HashMap<>();
+			
+			for (int i = 0; i < relation.length; i++) {
+				String s =  "";
+				for (Integer j : list2) {
+					s += relation[i][j];
+				}
+				if (map.containsKey(s)) {
+					return ;
+				} else map.put(s, 0);
+			}
+			
+			for (String s : list) {
+				int cnt = 0;
+				for (int i = 0; i < key.length(); i++) {
+					String subS = String.valueOf(key.charAt(i));
+					if (s.contains(subS)) cnt++;
+				}
+				if (cnt == s.length()) return ;
+			}
+			list.add(key);
+			return ;
+		}
+		for (int i = start; i < visited.length; i++) {
+			if (visited[i]) continue;
+			
+			visited[i] =true;
+			dfs (visited, i, depth + 1, end, relation);
+			visited[i] = false;
+		}
+		
+	}
+	
     public static int solution(String[][] relation) {
         int answer = 0;
-        HashMap<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < relation.length; i++) {
-        	map.put(relation[i][0], map.getOrDefault(relation[i][0], 0) + 1);
+    
+        for (int i = 0; i < relation[0].length; i++) {
+        	boolean [] visited = new boolean[relation[0].length];
+        	dfs(visited, 0, 0, i + 1, relation);
         }
-        boolean ch = true;
-        for (String x : map.keySet()) {
-        	if (map.get(x) != 1) {
-        		ch = false;
-        		break;
-        	}
-        }
-        if (ch == true) answer++;
+
+        answer = list.size();
         return answer;
     }
 }
