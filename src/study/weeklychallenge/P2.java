@@ -10,8 +10,7 @@ class Solution2 {
         long maxX = Long.MIN_VALUE;
         long minY = Long.MAX_VALUE;
         long maxY = Long.MIN_VALUE;
-        
-        
+          
         for (int i = 0; i < line.length; i++) {
         	long fA = line[i][0];
         	long fB = line[i][1];
