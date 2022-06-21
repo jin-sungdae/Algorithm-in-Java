@@ -32,8 +32,22 @@ class Solution7 {
     	for (int i = 0; i < rectangle.length; i++) {
     		makeBoard(2 * rectangle[i][0],2 * rectangle[i][1], 2 * rectangle[i][2], 2 * rectangle[i][3]);
     	}
+    	for (int i = 0; i < 20; i++) {
+    		for (int j = 0; j < 20; j++) {
+    			System.out.print(board[i][j] + " ");
+    		}
+    		System.out.println();
+    	}
     	
     	bfs(characterX * 2, characterY * 2, itemX * 2, itemY * 2);
+    	
+    	System.out.println();
+    	for (int i = 0; i < 20; i++) {
+    		for (int j = 0; j < 20; j++) {
+    			System.out.print(visited[i][j] + "   ");
+    		}
+    		System.out.println();
+    	}
     	
     	
         return visited[itemX * 2][itemY * 2] / 2;
