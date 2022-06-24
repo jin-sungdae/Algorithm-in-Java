@@ -7,6 +7,7 @@ public class P3 {
 	static int [][]arr;
 	static int total;
 	static int t;
+
 	public static void DFS(int L, int sum, int time) {
 		if (L == N) {
 			if (time > M) return;
