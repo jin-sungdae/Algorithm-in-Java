@@ -3,16 +3,15 @@ package study.monthcodechallengeseason2LV3;
 import java.util.*;
 
 class Solution2 {
-    public static int [] alist;
+    public static long [] alist;
     public static int n;
     public static long answer = 0;
     public static ArrayList<Integer>[] map;
     public static int[] indegree;
-    public static int root = 0;
 
     public static void bfs() {
         Queue<Integer> list = new LinkedList<>();
-        for (int i = 1; i <alist.length; i++){
+        for (int i = 1; i < alist.length; i++){
             if (map[i].size() == 1)
                 list.add(i);
         }
@@ -36,15 +35,15 @@ class Solution2 {
 
     public static long solution(int[] a, int[][] edges) {
 
-        alist = new int[a.length];
+        alist = new long[a.length];
         indegree = new int[a.length];
-        int tmp = 0;
         for (int i = 0; i < a.length; i++) {
             alist[i] = a[i];
-            tmp += a[i];
+            answer += a[i];
         }
-        if (tmp != 0)
+        if (answer != 0)
             return -1;
+        if (a.length == 2) return Math.abs(alist[0]);
         map = new ArrayList[a.length];
         for (int i = 0; i < a.length; i++) {
             map[i] = new ArrayList<>();
